@@ -1,0 +1,8 @@
+[
+  {
+    "id": "main.test",
+    "defaultMessage": "default message",
+    "message": "en_US translated message",
+    "files": ["src/Main.js"]
+  }
+]

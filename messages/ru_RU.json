@@ -1,0 +1,8 @@
+[
+  {
+    "id": "main.test",
+    "defaultMessage": "default message",
+    "message": "сообщение переведенное на ru_RU",
+    "files": ["src/Main.js"]
+  }
+]
