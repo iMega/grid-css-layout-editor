@@ -1,5 +1,7 @@
 import React from "react";
 
-const Main = () => <div>blank</div>;
+import Editor from "./GridLayoutEditor";
+
+const Main = () => <Editor />;
 
 export default Main;
