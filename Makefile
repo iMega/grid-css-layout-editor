@@ -4,5 +4,5 @@ dev: node_modules
 node_modules:
 	@npm install
 
-build_pages:
+build_pages: node_modules
 	@npm run build-pages
