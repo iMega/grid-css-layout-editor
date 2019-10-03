@@ -1,0 +1,54 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest/globals": true,
+    "jquery": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:jest/recommended"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "jest", "html", "jquery", "json"],
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "16.4"
+    }
+  },
+  "rules": {
+    "react/jsx-uses-react": 1,
+    "react/jsx-uses-vars": 1,
+    "react/react-in-jsx-scope": 0,
+    "react/display-name": 0,
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "double", { "allowTemplateLiterals": true }],
+    "semi": ["error", "always"],
+    "curly": ["error"],
+    "no-template-curly-in-string": "error",
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "never",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "one-var": ["error", { "var": "always", "let": "never", "const": "never" }]
+  }
+}
