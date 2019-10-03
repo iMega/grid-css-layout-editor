@@ -17,7 +17,7 @@ const reversRules = {
 /**
  * @returns {Object}
  */
-const EmptyCell = {
+const Cell = {
     name: name,
     area: undefined,
     left: undefined,
@@ -29,7 +29,7 @@ const EmptyCell = {
 /**
  * @returns {Object}
  */
-const createEmptyCell = name => ({
+const createCell = name => ({
     name: name,
     area: undefined,
     left: undefined,
@@ -58,7 +58,7 @@ const createSegmentCells = (type, cells) =>
  *
  * @param {Map} cells
  * @param {TOP | RIGHT | DOWN | LEFT} type
- * @param {EmptyCell[]} firstCellsInSegments
+ * @param {Cell[]} firstCellsInSegments
  */
 const stichingSegments = (cells, type, firstCellsInSegments) => {
     firstCellsInSegments.reduce((prev, cur) => {
@@ -75,9 +75,9 @@ const stichingSegments = (cells, type, firstCellsInSegments) => {
 };
 
 /**
- * @param {EmptyCell} fromCell
+ * @param {Cell} fromCell
  * @param {TOP | RIGHT | DOWN | LEFT} byEdge
- * @param {EmptyCell} toCell
+ * @param {Cell} toCell
  */
 const createEdge = (fromCell, byEdge, toCell) => {
     fromCell[byEdge] = toCell.name;
@@ -117,7 +117,7 @@ const fromConfig = (conf, cells, areas) => {
 
     const newCellsNames = [];
     names.forEach((_, name) => {
-        cells.set(name, createEmptyCell(name));
+        cells.set(name, createCell(name));
         newCellsNames.push(name);
     });
 
@@ -138,9 +138,9 @@ const fromConfig = (conf, cells, areas) => {
 /**
  *
  * @param {Map} cells
- * @param {EmptyCell} cell
+ * @param {Cell} cell
  * @param {TOP | RIGHT | DOWN | LEFT} edge
- * @returns {EmptyCell}
+ * @returns {Cell}
  */
 const getCellByEdge = (cells, cell, edge) => cells.get(cell[edge]);
 
@@ -148,7 +148,7 @@ const getCellByEdge = (cells, cell, edge) => cells.get(cell[edge]);
  *
  * @param {Map} cells
  * @param {Map} areas
- * @param {EmptyCell} cell
+ * @param {Cell} cell
  * @param {walkCellsToCss | walkCellsToGrid} cb
  * @returns {Array}
  */
@@ -162,13 +162,13 @@ const walkCells = (cells, areas, cell, cb) => {
 };
 
 /**
- * @param {EmptyCell} cell
+ * @param {Cell} cell
  * @returns {string}
  */
 const walkCellsToCss = cell => (cell.area ? cell.area : ".");
 
 /**
- * @param {EmptyCell} cell
+ * @param {Cell} cell
  * @returns {string}
  */
 const walkCellsToGrid = cell => (cell.area ? cell.area : cell.name);
@@ -176,7 +176,7 @@ const walkCellsToGrid = cell => (cell.area ? cell.area : cell.name);
 /**
  * @param {Map} cells
  * @param {Map} areas
- * @param {EmptyCell} cell
+ * @param {Cell} cell
  * @param {walkCellsToCss | walkCellsToGrid} cb
  * @returns {Array}
  */
@@ -195,7 +195,7 @@ const walkRowsCells = (cells, areas, cell, cb) => {
 /**
  * @param {Map} cells
  * @param {Map} areas
- * @param {EmptyCell} firstCell
+ * @param {Cell} firstCell
  * @returns {string}
  */
 const toCss = (cells, areas, firstCell) => {
@@ -209,7 +209,7 @@ const toCss = (cells, areas, firstCell) => {
 /**
  * @param {Map} cells
  * @param {Map} areas
- * @param {EmptyCell} firstCell
+ * @param {Cell} firstCell
  * @returns {string}
  */
 const toGrid = (cells, areas, firstCell) => {
@@ -222,12 +222,12 @@ const toGrid = (cells, areas, firstCell) => {
 
 /**
  * @param {Map} cells
- * @param {string} cellName
+ * @param {Cell} cell
  * @param {Map} areas
  * @returns {boolean}
  */
-const createArea = (cells, cellName, areas) => {
-    const cell = cells.get(cellName);
+const createArea = (cells, cell, areas) => {
+    console.log("======================================");
     const name = NameGenerator();
     if (areas.has(name)) {
         return false;
@@ -271,7 +271,7 @@ const Matrix = props => {
             areas: areas,
             cells: cells
         }),
-        createArea: cellName => createArea(cells, cellName, areas),
+        createArea: cell => createArea(cells, cell, areas),
         deleteArea: areaID => {},
         changeArea: (areaID, edge, direction) => {}
     };

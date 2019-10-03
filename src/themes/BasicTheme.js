@@ -1,12 +1,24 @@
 import styled from "react-emotion";
 
+const IconOuter = styled.span`
+    position: relative;
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+`;
+
+const IconPosition = styled.span`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: ${props => props.color};
+    transform: translate(-50%, -50%);
+`;
+
 const BasicTheme = () => {
-    return {
+    const theme = {
         grid: styled.div`
             display: grid;
-            background: #edf1f5;
-            border-top: 2px dashed #777;
-            border-left: 2px dashed #777;
         `,
         cell: styled.div`
             min-width: 120px;
@@ -15,10 +27,19 @@ const BasicTheme = () => {
             align-items: center;
             position: relative;
             display: flex;
-            border-bottom: 2px dashed #777;
-            border-right: 2px dashed #777;
-        `
+        `,
+        buttonGeneric: styled.button``
     };
+
+    theme["button"] = {
+        default: styled(theme.buttonGeneric)``
+    };
+
+    theme["buttonIcon"] = {
+        default: styled(theme.button.default)``
+    };
+
+    return theme;
 };
 
 export default BasicTheme;

@@ -11,11 +11,15 @@ const styleGrid = (props, template) => {
     `;
 };
 
-const styleCell = (props, cell) => {
-    const CellStyle = styled(props.cell)`
+const Cell = (props, cell, action) => {
+    const CellStyle = styled(props.theme.cell)`
         grid-area: ${cell.name};
     `;
-    return <CellStyle key={cell.name} {...props} />;
+    return (
+        <CellStyle key={cell.name} {...props}>
+            <props.theme.button.default>add</props.theme.button.default>
+        </CellStyle>
+    );
 };
 
 const MapIterator = (map, cb) => {
@@ -36,7 +40,9 @@ class Editor extends React.Component {
         const Grid = styleGrid(this.props.theme, g.template);
         return (
             <Grid>
-                {MapIterator(g.cells, i => styleCell(this.props.theme, i))}
+                {MapIterator(g.cells, cell =>
+                    Cell(this.props, cell, () => this.matrix.createArea(cell))
+                )}
             </Grid>
         );
     };
