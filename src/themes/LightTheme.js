@@ -3,7 +3,6 @@ import styled from "react-emotion";
 const LightTheme = theme => {
     theme["grid"] = styled(theme.grid)`
         background: #edf1f5;
-        background: #edf1f5;
         border-top: 2px dashed #777;
         border-left: 2px dashed #777;
     `;
