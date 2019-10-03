@@ -29,14 +29,15 @@ const Cell = {
 /**
  * @returns {Object}
  */
-const createCell = name => ({
-    name: name,
-    area: undefined,
-    left: undefined,
-    right: undefined,
-    top: undefined,
-    down: undefined
-});
+const createCell = name => {
+    const cell = Object.assign({}, Cell);
+    cell.name = name;
+    Object.defineProperty(cell, "name", {
+        configurable: false,
+        writable: false
+    });
+    return cell;
+};
 
 /**
  * @param {TOP | RIGHT | DOWN | LEFT} edge
