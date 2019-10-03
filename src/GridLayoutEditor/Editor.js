@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "react-emotion";
 
 import Matrix from "./Matrix";
@@ -20,6 +21,12 @@ const Cell = (props, cell, action) => {
             <props.theme.button.default>add</props.theme.button.default>
         </CellStyle>
     );
+};
+
+Cell.propTypes = {
+    theme: PropTypes.shape({
+        cell: PropTypes.func
+    })
 };
 
 const MapIterator = (map, cb) => {
@@ -47,5 +54,9 @@ class Editor extends React.Component {
         );
     };
 }
+
+Editor.propTypes = {
+    theme: PropTypes.object
+};
 
 export default Editor;
