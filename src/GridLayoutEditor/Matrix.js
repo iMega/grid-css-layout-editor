@@ -233,15 +233,30 @@ const createArea = (cells, cellName, areas) => {
         return false;
     }
     cell.area = name;
+
+    const allowEdge = [LEFT, RIGHT, TOP, DOWN].map(e =>
+        hasArea(getCellByEdge(cells, cell, e))
+    );
+
     areas.set(name, {
         name: name,
         left: [cell.left],
         right: [cell.right],
         top: [cell.top],
-        down: [cell.down]
+        down: [cell.down],
+        canIncreasedLeft: allowEdge[0],
+        canIncreasedRight: allowEdge[1],
+        canIncreasedTop: allowEdge[2],
+        canIncreasedDown: allowEdge[3],
+        canLessenLeft: false,
+        canLessenRight: false,
+        canLessenTop: false,
+        canLessenDown: false
     });
     return true;
 };
+
+const hasArea = cell => cell.area !== undefined;
 
 const Matrix = props => {
     const cells = new Map();
@@ -250,9 +265,6 @@ const Matrix = props => {
     const firstCell = fromConfig(props.template, cells, areas);
 
     return {
-        fromConfig: conf => {
-            firstCell = fromConfig(conf, cells, areas);
-        },
         toCss: () => toCss(cells, areas, firstCell),
         toGrid: () => ({
             template: toGrid(cells, areas, firstCell),
