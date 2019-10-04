@@ -14,7 +14,7 @@ module.exports = {
                 test: /\.svg$/,
                 use: [
                     {
-                        loader: "svgr/webpack",
+                        loader: "@svgr/webpack",
                         options: {
                             dimensions: false,
                             prettier: false
