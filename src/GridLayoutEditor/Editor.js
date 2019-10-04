@@ -18,7 +18,7 @@ const Cell = (props, cell, action) => {
     `;
     return (
         <CellStyle key={cell.name} {...props}>
-            <props.theme.button.default>add</props.theme.button.default>
+            <props.theme.button.areaAdd onClick={action} />
         </CellStyle>
     );
 };
@@ -48,7 +48,10 @@ class Editor extends React.Component {
         return (
             <Grid>
                 {MapIterator(g.cells, cell =>
-                    Cell(this.props, cell, () => this.matrix.createArea(cell))
+                    Cell(this.props, cell, () => {
+                        console.log("qqqq");
+                        this.matrix.createArea(cell);
+                    })
                 )}
             </Grid>
         );
